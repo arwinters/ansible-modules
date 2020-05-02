@@ -3,9 +3,6 @@
 
 # Copyright: (c) 2020, Anthony Winters <info@nforce-it.nl>
 
-from ansible.module_utils.basic import AnsibleModule
-import salt.config
-import salt.wheel
 
 ANSIBLE_METADATA = {'metadata_version': '1.1',
                     'status': ['preview'],
@@ -88,6 +85,10 @@ RETURN = '''
   "state": "present"
 }
 '''
+
+from ansible.module_utils.basic import AnsibleModule
+import salt.config
+import salt.wheel
 
 
 def _set_options(module):
