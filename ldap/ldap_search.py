@@ -97,12 +97,11 @@ def _disconnect(session):
 def _connect(module):
     ldap_server = module.params['ldap_host'] + ":" + module.params['ldap_port']
 
-    session = ldap.initialize("ldap://{}".format(ldap_server))
-    session.protocol_version = ldap.VERSION3
-    session.set_option(ldap.OPT_REFERRALS, 0)
-
     try:
-        bind = session.simple_bind_s(module.params['ldap_user'], module.params['ldap_password'])
+        session = ldap.initialize("ldap://{}".format(ldap_server))
+        session.protocol_version = ldap.VERSION3
+        session.set_option(ldap.OPT_REFERRALS, 0)
+        session.simple_bind_s(module.params['ldap_user'], module.params['ldap_password'])
     except ldap.INVALID_CREDENTIALS:
         module.fail_json(msg="Invalid Credentials")
     except ldap.LDAPError as e:
